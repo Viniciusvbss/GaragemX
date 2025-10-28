@@ -1,1 +1,14 @@
 @import "tailwindcss";
+
+@theme {
+  --color-garage-start: #11998e;
+  --color-garage-end: #38ef7d;
+}
+
+.bg-garage-gradient-to-br {
+  background-image: linear-gradient(to bottom right, var(--color-garage-start), var(--color-garage-end));
+}
+
+.bg-garage-gradient {
+  background-image: linear-gradient(to right, var(--color-garage-start), var(--color-garage-end));
+}
