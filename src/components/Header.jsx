@@ -1,12 +1,19 @@
 import { useState } from 'react'
 
 export default function Header({ brandName, navigationItems = [] }) {
+
+  // Define a variavel que controla o estado do menu mobile
+  // isOpen = Variável que guarda o valor(começa com false)
+  // setIsOpen = Função para mudar o valor
+  // useState(false) = Valor inicial é false(menu fechado)
+
   const [isOpen, setIsOpen] = useState(false)
 
   return (
     <nav className="bg-garage-gradient-to-br shadow-md shadow-black/60">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-20">
+
           {/* Logo */}
           <a href="/" className="text-white text-2xl font-bold italic">
             {brandName}
@@ -18,17 +25,17 @@ export default function Header({ brandName, navigationItems = [] }) {
               <a
                 key={item.name}
                 href={item.href}
-                className={`text-base font-medium transition-colors ${
-                  item.current ? 'text-white font-semibold' : 'text-white/90 hover:text-white'
-                }`}
+                className={`text-base font-medium transition-colors ${item.current ? 'text-white font-semibold' : 'text-white/90 hover:text-white'
+                  }`}
               >
                 {item.name}
               </a>
             ))}
           </div>
 
-          {/* Mobile Menu Button */}
+          {/*  Menu Hamburguer */}
           <button
+          // Quando clicar no botão, chama a função setIsOpen
             onClick={() => setIsOpen(!isOpen)}
             className="md:hidden text-white p-2"
           >
@@ -42,16 +49,16 @@ export default function Header({ brandName, navigationItems = [] }) {
           </button>
         </div>
 
-        {/* Mobile Menu */}
+
+        {/* Menu mobile aparece/desaparece  */}
         {isOpen && (
           <div className="md:hidden pb-4">
             {navigationItems.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
-                className={`block py-2 text-base font-medium ${
-                  item.current ? 'text-white font-semibold' : 'text-white/90'
-                }`}
+                className={`block py-2 text-base font-medium ${item.current ? 'text-white font-semibold' : 'text-white/90'
+                  }`}
               >
                 {item.name}
               </a>
