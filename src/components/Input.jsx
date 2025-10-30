@@ -1,19 +1,21 @@
 import { forwardRef } from 'react'
 
 /**
- * Input Component - Reusable input field with variants
+ * Componente Input - Campo de entrada reutilizável com variantes
  *
  * @param {Object} props
- * @param {string} props.label - Label text
- * @param {string} props.type - Input type: 'text', 'email', 'password', 'number', etc.
- * @param {string} props.placeholder - Placeholder text
- * @param {string} props.error - Error message
- * @param {boolean} props.disabled - Disabled state
- * @param {string} props.variant - Style variant: 'default', 'filled'
- * @param {string} props.className - Additional classes
- * @param {boolean} props.required - Required field
+ * @param {string} props.label - Texto do rótulo
+ * @param {string} props.type - Tipo do input: 'text', 'email', 'password', 'number', etc.
+ * @param {string} props.placeholder - Texto de placeholder
+ * @param {string} props.error - Mensagem de erro
+ * @param {boolean} props.disabled - Estado desabilitado
+ * @param {string} props.variant - Variante de estilo: 'default', 'filled'
+ * @param {string} props.className - Classes adicionais
+ * @param {boolean} props.required - Campo obrigatório
  */
-const Input = forwardRef(({
+const Input = forwardRef(
+  //função anônima
+  ({
   label,
   type = 'text',
   placeholder = '',
