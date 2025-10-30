@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Home from '../pages/Home.jsx';
-import CadastroLoja from '../pages/CadastroLoja.jsx';
+import CadastroLoja from '../pages/AuthLojista/CadastroLoja.jsx';
 
 function AppRoutes() {
   return (
