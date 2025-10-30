@@ -1,8 +1,12 @@
 import { useForm } from 'react-hook-form'
-import Input from '../components/Input'
-import Button from '../components/Button'
-import Header from '../components/Header'
-import { BRAND_NAME } from '../constants/brand'
+import Button from '../../components/Button'
+import Header from '../../components/Header'
+import DadosLojaForm from '../../components/forms/DadosLojaForm'
+import EnderecoForm from '../../components/forms/EnderecoForm'
+import DadosResponsavelForm from '../../components/forms/DadosResponsavelForm'
+import SenhaForm from '../../components/forms/SenhaForm'
+import TermosCondicoesCheckbox from '../../components/forms/TermosCondicoesCheckbox'
+import { BRAND_NAME } from '../../constants/brand'
 
 export default function CadastroLoja() {
   const { register, handleSubmit, formState: { errors }, watch } = useForm()
@@ -49,305 +53,28 @@ export default function CadastroLoja() {
             {/* Formulário */}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
               {/* Seção: Dados da Loja */}
-              <div className="space-y-5">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
-                    <span className="text-green-600 font-bold text-lg">1</span>
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-800">
-                    Dados da Loja
-                  </h2>
-                </div>
-
-                <Input
-                  label="Nome da Loja"
-                  type="text"
-                  placeholder="Ex: Oficina do João"
-                  error={errors.nomeLoja?.message}
-                  {...register('nomeLoja', {
-                    required: 'Nome da loja é obrigatório',
-                    minLength: {
-                      value: 3,
-                      message: 'Nome deve ter no mínimo 3 caracteres'
-                    }
-                  })}
-                  required
-                />
-
-                <Input
-                  label="CNPJ"
-                  type="text"
-                  placeholder="00.000.000/0000-00"
-                  error={errors.cnpj?.message}
-                  {...register('cnpj', {
-                    required: 'CNPJ é obrigatório',
-                    pattern: {
-                      value: /^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/,
-                      message: 'CNPJ inválido (formato: 00.000.000/0000-00)'
-                    }
-                  })}
-                  required
-                />
-
-                <Input
-                  label="Telefone"
-                  type="tel"
-                  placeholder="(11) 98765-4321"
-                  error={errors.telefone?.message}
-                  {...register('telefone', {
-                    required: 'Telefone é obrigatório'
-                  })}
-                  required
-                />
-
-                <Input
-                  label="Email da Loja"
-                  type="email"
-                  placeholder="contato@minhaloja.com"
-                  error={errors.emailLoja?.message}
-                  {...register('emailLoja', {
-                    required: 'Email é obrigatório',
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Email inválido'
-                    }
-                  })}
-                  required
-                />
-              </div>
+              <DadosLojaForm register={register} errors={errors} />
 
               {/* Divisor */}
               <div className="border-t border-gray-200"></div>
 
               {/* Seção: Endereço */}
-              <div className="space-y-5">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <span className="text-blue-600 font-bold text-lg">2</span>
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-800">
-                    Endereço
-                  </h2>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="md:col-span-1">
-                    <Input
-                      label="CEP"
-                      type="text"
-                      placeholder="00000-000"
-                      error={errors.cep?.message}
-                      {...register('cep', {
-                        required: 'CEP é obrigatório',
-                        pattern: {
-                          value: /^\d{5}-?\d{3}$/,
-                          message: 'CEP inválido'
-                        }
-                      })}
-                      required
-                    />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <Input
-                      label="Rua"
-                      type="text"
-                      placeholder="Av. Paulista"
-                      error={errors.rua?.message}
-                      {...register('rua', { required: 'Rua é obrigatória' })}
-                      required
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="md:col-span-1">
-                    <Input
-                      label="Número"
-                      type="text"
-                      placeholder="123"
-                      error={errors.numero?.message}
-                      {...register('numero', { required: 'Número é obrigatório' })}
-                      required
-                    />
-                  </div>
-
-                  <div className="md:col-span-2">
-                    <Input
-                      label="Complemento"
-                      type="text"
-                      placeholder="Sala 5 (opcional)"
-                      {...register('complemento')}
-                    />
-                  </div>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <Input
-                    label="Bairro"
-                    type="text"
-                    placeholder="Centro"
-                    error={errors.bairro?.message}
-                    {...register('bairro', { required: 'Bairro é obrigatório' })}
-                    required
-                  />
-
-                  <Input
-                    label="Cidade"
-                    type="text"
-                    placeholder="São Paulo"
-                    error={errors.cidade?.message}
-                    {...register('cidade', { required: 'Cidade é obrigatória' })}
-                    required
-                  />
-                </div>
-
-                <Input
-                  label="Estado"
-                  type="text"
-                  placeholder="SP"
-                  error={errors.estado?.message}
-                  {...register('estado', {
-                    required: 'Estado é obrigatório',
-                    maxLength: {
-                      value: 2,
-                      message: 'Use a sigla do estado (ex: SP)'
-                    }
-                  })}
-                  required
-                />
-              </div>
+              <EnderecoForm register={register} errors={errors} />
 
               {/* Divisor */}
               <div className="border-t border-gray-200"></div>
 
               {/* Seção: Dados do Responsável */}
-              <div className="space-y-5">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <span className="text-purple-600 font-bold text-lg">3</span>
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-800">
-                    Dados do Responsável
-                  </h2>
-                </div>
-
-                <Input
-                  label="Nome Completo"
-                  type="text"
-                  placeholder="João Silva"
-                  error={errors.nomeResponsavel?.message}
-                  {...register('nomeResponsavel', {
-                    required: 'Nome do responsável é obrigatório'
-                  })}
-                  required
-                />
-
-                <Input
-                  label="CPF"
-                  type="text"
-                  placeholder="000.000.000-00"
-                  error={errors.cpf?.message}
-                  {...register('cpf', {
-                    required: 'CPF é obrigatório',
-                    pattern: {
-                      value: /^\d{3}\.\d{3}\.\d{3}-\d{2}$/,
-                      message: 'CPF inválido (formato: 000.000.000-00)'
-                    }
-                  })}
-                  required
-                />
-
-                <Input
-                  label="Email do Responsável"
-                  type="email"
-                  placeholder="joao@email.com"
-                  error={errors.emailResponsavel?.message}
-                  {...register('emailResponsavel', {
-                    required: 'Email é obrigatório',
-                    pattern: {
-                      value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                      message: 'Email inválido'
-                    }
-                  })}
-                  required
-                />
-              </div>
+              <DadosResponsavelForm register={register} errors={errors} />
 
               {/* Divisor */}
               <div className="border-t border-gray-200"></div>
 
               {/* Seção: Senha */}
-              <div className="space-y-5">
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
-                    <span className="text-orange-600 font-bold text-lg">4</span>
-                  </div>
-                  <h2 className="text-2xl font-bold text-gray-800">
-                    Criar Senha
-                  </h2>
-                </div>
-
-                <Input
-                  label="Senha"
-                  type="password"
-                  placeholder="Mínimo 8 caracteres"
-                  error={errors.senha?.message}
-                  {...register('senha', {
-                    required: 'Senha é obrigatória',
-                    minLength: {
-                      value: 8,
-                      message: 'Senha deve ter no mínimo 8 caracteres'
-                    }
-                  })}
-                  required
-                />
-
-                <Input
-                  label="Confirmar Senha"
-                  type="password"
-                  placeholder="Digite a senha novamente"
-                  error={errors.confirmarSenha?.message}
-                  {...register('confirmarSenha', {
-                    required: 'Confirmação de senha é obrigatória',
-                    validate: (value) =>
-                      value === watch('senha') || 'As senhas não coincidem'
-                  })}
-                  required
-                />
-              </div>
+              <SenhaForm register={register} errors={errors} watch={watch} />
 
               {/* Termos e Condições */}
-              <div className="bg-gray-50 rounded-xl p-5 border border-gray-200">
-                <div className="flex items-start gap-3">
-                  <input
-                    type="checkbox"
-                    id="termos"
-                    className="mt-1 w-5 h-5 text-green-600 border-gray-300 rounded focus:ring-green-500"
-                    {...register('termos', {
-                      required: 'Você deve aceitar os termos e condições'
-                    })}
-                  />
-                  <label htmlFor="termos" className="text-sm text-gray-700 leading-relaxed">
-                    Eu li e aceito os{' '}
-                    <a href="#" className="text-green-600 hover:text-green-700 font-semibold underline">
-                      termos e condições
-                    </a>{' '}
-                    e a{' '}
-                    <a href="#" className="text-green-600 hover:text-green-700 font-semibold underline">
-                      política de privacidade
-                    </a>
-                  </label>
-                </div>
-                {errors.termos && (
-                  <p className="text-sm text-red-600 flex items-center gap-1 mt-2 ml-8">
-                    <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
-                      <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                    </svg>
-                    {errors.termos.message}
-                  </p>
-                )}
-              </div>
+              <TermosCondicoesCheckbox register={register} errors={errors} />
 
               {/* Botões */}
               <div className="flex flex-col sm:flex-row gap-4 pt-8">
