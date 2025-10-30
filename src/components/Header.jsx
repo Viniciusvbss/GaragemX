@@ -1,6 +1,14 @@
 import { useState } from 'react'
 
-export default function Header({ brandName, navigationItems = [] }) {
+// Navegação padrão do sistema
+const defaultNavigation = [
+  { name: 'Home', href: '/', current: false },
+  { name: 'Serviços', href: '#', current: false },
+  { name: 'Sobre', href: '#', current: false },
+  { name: 'Contato', href: '#', current: false },
+]
+
+export default function Header({ brandName, navigationItems = defaultNavigation }) {
 
   // Define a variavel que controla o estado do menu mobile
   // isOpen = Variável que guarda o valor(começa com false)
@@ -8,6 +16,12 @@ export default function Header({ brandName, navigationItems = [] }) {
   // useState(false) = Valor inicial é false(menu fechado)
 
   const [isOpen, setIsOpen] = useState(false)
+
+  // Marca automaticamente o item atual baseado na URL
+  const navItemsWithCurrent = navigationItems.map(item => ({
+    ...item,
+    current: item.href === window.location.pathname
+  }))
 
   return (
     <nav className="bg-garage-gradient-to-br shadow-md shadow-black/60">
@@ -21,7 +35,7 @@ export default function Header({ brandName, navigationItems = [] }) {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8">
-            {navigationItems.map((item) => (
+            {navItemsWithCurrent.map((item) => (
               <a
                 key={item.name}
                 href={item.href}
@@ -53,7 +67,7 @@ export default function Header({ brandName, navigationItems = [] }) {
         {/* Menu mobile aparece/desaparece  */}
         {isOpen && (
           <div className="md:hidden pb-4">
-            {navigationItems.map((item) => (
+            {navItemsWithCurrent.map((item) => (
               <a
                 key={item.name}
                 href={item.href}

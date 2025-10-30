@@ -1,26 +1,29 @@
+import { useNavigate } from 'react-router-dom'
 import Button from "./Button"
 
 /**
  * Logo Component - Hero section with CTA buttons
  *
  * @param {Object} props
- * @param {string} props.onCadastroClick - URL ou função para o botão Cadastre-se
- * @param {string} props.onLoginClick - URL ou função para o botão Login
+ * @param {string|function} props.onCadastroClick - URL (string) ou função para o botão Cadastre-se
+ * @param {string|function} props.onLoginClick - URL (string) ou função para o botão Login
  */
 export default function Logo({ onCadastroClick = '#', onLoginClick = '#' }) {
+  const navigate = useNavigate()
+
   const handleCadastro = () => {
     if (typeof onCadastroClick === 'function') {
       onCadastroClick()
-    } else {
-      window.location.href = onCadastroClick
+    } else if (onCadastroClick !== '#') {
+      navigate(onCadastroClick)
     }
   }
 
   const handleLogin = () => {
     if (typeof onLoginClick === 'function') {
       onLoginClick()
-    } else {
-      window.location.href = onLoginClick
+    } else if (onLoginClick !== '#') {
+      navigate(onLoginClick)
     }
   }
 

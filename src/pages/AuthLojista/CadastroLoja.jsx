@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import Button from '../../components/Button'
 import Header from '../../components/Header'
 import DadosLojaForm from '../../components/forms/DadosLojaForm'
@@ -10,32 +11,38 @@ import { BRAND_NAME } from '../../constants/brand'
 
 export default function CadastroLoja() {
   const { register, handleSubmit, formState: { errors }, watch } = useForm()
-
-  const navigation = [
-    { name: 'Home', href: '/', current: false },
-    { name: 'Cadastro', href: '/cadastro-loja', current: true },
-  ]
+  const navigate = useNavigate()
 
   const onSubmit = async (data) => {
     console.log('Dados do formulário:', data)
     alert('Cadastro realizado com sucesso!')
+    // Redireciona para a página de login após cadastro bem-sucedido
+    navigate('/login-lojista')
+  }
+
+  const handleGoToLogin = () => {
+    navigate('/login-lojista')
+  }
+
+  const handleCancel = () => {
+    navigate('/')
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-950 via-gray-900 to-black relative overflow-hidden">
+    <div className="min-h-screen bg-linear-to-br from-gray-950 via-gray-900 to-black relative overflow-hidden">
       {/* Background decorations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 -right-40 w-96 h-96 bg-green-500/5 rounded-full blur-3xl"></div>
         <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-teal-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      <Header brandName={BRAND_NAME} navigationItems={navigation} />
+      <Header brandName={BRAND_NAME} />
 
       <main className="container mx-auto px-4 py-8 md:py-12 relative z-10">
         <div className="max-w-3xl mx-auto">
           {/* Header do formulário */}
           <div className="text-center mb-8">
-            <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-green-400 to-emerald-500 rounded-2xl mb-4 shadow-lg shadow-green-500/20">
+            <div className="inline-flex items-center justify-center w-16 h-16 bg-linear-to-br from-green-400 to-emerald-500 rounded-2xl mb-4 shadow-lg shadow-green-500/20">
               <svg className="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
               </svg>
@@ -97,7 +104,7 @@ export default function CadastroLoja() {
                   variant="outline"
                   size="lg"
                   className="flex-1 border-green-500! text-green-600! hover:bg-green-50! hover:text-green-700!"
-                  onClick={() => window.location.href = '/'}
+                  onClick={handleCancel}
                 >
                   Cancelar
                 </Button>
@@ -108,9 +115,13 @@ export default function CadastroLoja() {
             <div className="text-center mt-8 pt-6 border-t border-gray-200">
               <p className="text-gray-600">
                 Já tem uma conta?{' '}
-                <a href="/login" className="text-green-600 hover:text-green-700 font-bold underline">
+                <button
+                  type="button"
+                  onClick={handleGoToLogin}
+                  className="text-green-600 hover:text-green-700 font-bold underline"
+                >
                   Fazer login
-                </a>
+                </button>
               </p>
             </div>
           </div>
