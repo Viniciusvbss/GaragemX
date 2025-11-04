@@ -1,8 +1,12 @@
 @import "tailwindcss";
 
-@theme {
+:root {
   --color-garage-start: #11998e;
   --color-garage-end: #38ef7d;
+  --primary: #11998e;
+  --primary-foreground: white;
+  --secondary: #f3f4f6;
+  --secondary-foreground: #4b5563;
 }
 
 .bg-garage-gradient-to-br {
