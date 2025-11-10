@@ -13,7 +13,7 @@ export default function LoginLojista() {
     console.log('Dados de login:', data)
     alert('Login realizado com sucesso!')
     // Aqui você faria a autenticação real
-    navigate('/loja')
+    navigate('/MenuLojas')
   }
 
   const handleGoToCadastro = () => {

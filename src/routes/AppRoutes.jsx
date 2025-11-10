@@ -3,6 +3,7 @@ import Home from '../pages/Home.jsx';
 import CadastroLoja from '../pages/AuthLojista/CadastroLoja.jsx';
 import LoginLojista from '../pages/AuthLojista/LoginLojista.jsx';
 import LojaPage from '../pages/LojaPage.jsx';
+import MenuLojas from '../pages/MenuLojas.jsx';
 
 function AppRoutes() {
   return (
@@ -12,6 +13,7 @@ function AppRoutes() {
         <Route path="/cadastro-loja" element={<CadastroLoja />} />
         <Route path="/login-lojista" element={<LoginLojista />} />
         <Route path="/loja" element={<LojaPage />} />
+        <Route path="/MenuLojas" element={<MenuLojas />} />
       </Routes>
     </BrowserRouter>
   );

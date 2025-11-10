@@ -1,4 +1,4 @@
-import Bebidas from '../assets/icons/Bebidas.jsx'
+import Bebidas from '../assets/icons/Bebidas.svg?react'
 import { Search } from 'lucide-react'
 import Input from './Input.jsx'
 
