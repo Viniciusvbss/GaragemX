@@ -9,6 +9,12 @@ export default {
       colors: {
         'garage-start': '#11998e',
         'garage-end': '#38ef7d',
+        background: 'white',
+        border: '#e5e7eb',
+        primary: 'var(--primary)',
+        'primary-foreground': 'white',
+        secondary: '#f3f4f6',
+        'secondary-foreground': '#4b5563',
       },
       backgroundImage: {
         'garage-gradient': 'linear-gradient(to right, #11998e, #38ef7d)',

@@ -24,7 +24,7 @@ export default function Header({ brandName, navigationItems = defaultNavigation 
   }))
 
   return (
-    <nav className="bg-garage-gradient-to-br shadow-md shadow-black/60">
+    <nav className="bg-garage-solid shadow-md shadow-black/60">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-20">
 

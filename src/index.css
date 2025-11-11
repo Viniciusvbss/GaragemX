@@ -1,14 +1,25 @@
 @import "tailwindcss";
 
-@theme {
+:root {
   --color-garage-start: #11998e;
+  --color-garage-med: #24d46d;
   --color-garage-end: #38ef7d;
+  --primary: #11998e;
+  --primary-foreground: white;
+  --secondary: #f3f4f6;
+  --secondary-foreground: #4b5563;
 }
 
 .bg-garage-gradient-to-br {
-  background-image: linear-gradient(to bottom right, var(--color-garage-start), var(--color-garage-end));
+  background-image: linear-gradient(to bottom right, var(--color-garage-start), var(--color-garage-med));
 }
 
 .bg-garage-gradient {
   background-image: linear-gradient(to right, var(--color-garage-start), var(--color-garage-end));
+}
+.bg-garage-solid {
+  background-color: var(--color-garage-start);
+}
+.text-garage-end {
+  color: var(--color-garage-end);
 }
